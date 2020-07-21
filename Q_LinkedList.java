@@ -11,21 +11,17 @@ class TheLinkedList {
     newNode.data = data;
     newNode.next = null;
 
-    if (this.head == null) {
-      // For beginning
+    if (head == null) {
       this.head = newNode;
-
     } else {
-      // For End
-      Node n = this.head;
+      Node n = head;
 
       while (n.next != null) {
         n = n.next;
       }
+
       n.next = newNode;
-
     }
-
   }
 
   public void insertAtIndex(int index, int data) {
@@ -40,24 +36,6 @@ class TheLinkedList {
         n = n.next;
       }
 
-      newnode.next = n.next;
-      n.next = newnode;
-    }
-  }
-
-  public void sortedInsert(int data) {
-    Node newnode = new Node();
-    newnode.data = data;
-    newnode.next = null;
-
-    if (head == null || head.data >= newnode.data) {
-      newnode.next = head;
-      head = newnode;
-    } else {
-      Node n = head;
-      while (n.next != null && n.next.data < newnode.data) {
-        n = n.next;
-      }
       newnode.next = n.next;
       n.next = newnode;
     }
@@ -91,56 +69,39 @@ class TheLinkedList {
     return i;
   }
 
-  public void reverse() {
-    if (head == null) {
-      System.out.println("List Empty");
-    } else {
-      Node current = head;
-      Node previous = null;
-      Node next = null;
-
-      while (current != null) {
-        next = current.next;
-        current.next = previous;
-        previous = current;
-        current = next;
-      }
-      head = previous;
-    }
-  }
-
   public void show() {
-    Node node = this.head;
+    Node node = head;
 
     while (node.next != null) {
-      System.out.println(node.data);
+      System.out.print(node.data + ", ");
       node = node.next;
     }
     System.out.println(node.data);
-    System.out.println();
-
   }
-
 }
 
-public class LinkedList {
+public class Q_LinkedList {
   public static void main(String[] args) {
     TheLinkedList list = new TheLinkedList();
 
-    list.insert(12);
+    list.insert(23);
+    list.insert(45);
     list.insert(34);
-    list.insert(65);
+    list.insert(23);
+    list.insert(67);
+    list.insert(89);
     list.show();
-    list.insertAtIndex(3, 77);
-    list.show();
-    list.sortedInsert(50);
-    list.show();
-    // list.deleteAt(0);
-    // list.show();
-    int index = list.searchItem(77);
-    System.out.println("->" + index);
 
-    // list.reverse();
-    // list.show();
+    // Insert 55 after 34
+    int index = list.searchItem(34);
+    list.insertAtIndex(index + 1, 55);
+    list.show();
+
+    // Delete an element before 67
+    index = list.searchItem(67);
+    list.deleteAt(index - 1);
+    list.show();
+
   }
+
 }
